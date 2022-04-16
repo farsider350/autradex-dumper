@@ -8,7 +8,7 @@ Sells just under current market order
 
 INSTALL:
 
-npm install graviex-dumper --global
+npm install autradex-dumper --global
 
 
   Usage: App [options]
@@ -28,10 +28,10 @@ npm install graviex-dumper --global
 
 
 EXAMPLE USAGE:
-graviex-dumper --ticker onzbtc
-graviex-dumper --market btc --increase 0.000000001 --volume 100 --secretkey 3f5AZ44ViStBpGg6KdqvY8UiE0yvm2Yygdm2xQ6 --accesskey KQxX1dTBSjKbvc5xVoMMUl9THFaXKI2rQ4RwfoE --coin gio --looptime 10
+autradex-dumper --ticker onzbtc
+autradex-dumper --market btc --increase 0.000000001 --volume 100 --secretkey 3f5AZ44ViStBpGg6KdqvY8UiE0yvm2Yygdm2xQ6 --accesskey KQxX1dTBSjKbvc5xVoMMUl9THFaXKI2rQ4RwfoE --coin gio --looptime 10
 
 or DUMP ALL coins
-graviex-dumper --market btc --increase 0.000000001 --volume ALL --secretkey 3f5AZ44ViStBpGg6KdqvY8UiE0yvm2Yygdm2xQ6 --accesskey KQxX1dTBSjKbvc5xVoMMUl9THFaXKI2rQ4RwfoE --coin gio --looptime 10
+autradex-dumper --market btc --increase 0.000000001 --volume ALL --secretkey 3f5AZ44ViStBpGg6KdqvY8UiE0yvm2Yygdm2xQ6 --accesskey KQxX1dTBSjKbvc5xVoMMUl9THFaXKI2rQ4RwfoE --coin gio --looptime 10
 
 

@@ -24,13 +24,13 @@
 
   EXAMPLE USAGE:
 
-    graviex-dumper --ticker onzbtc
-    graviex-dumper --market onzbtc --increase 0.000000001 --volume 100 --secretkey 3f5AZ4BViStBpGg6KdqvY8UiE0yvm2Yygdm2xQ66 --accesskey KQxX1dTBSjKbvc5xVoMMUl9THFaXKI2rQ4RwfPoE
+    autradex-dumper --ticker onzbtc
+    autradex-dumper --market onzbtc --increase 0.000000001 --volume 100 --secretkey 3f5AZ4BViStBpGg6KdqvY8UiE0yvm2Yygdm2xQ66 --accesskey KQxX1dTBSjKbvc5xVoMMUl9THFaXKI2rQ4RwfPoE
 
 */
 // Insure you have enough in your account to cover Bot.
 
-var graviex = require("graviex");
+var autradex = require("./autradex.js");
 const chalkAnimation = require('chalk-animation');
 var program = require('commander');
 
@@ -56,7 +56,7 @@ program
 if (program.ticker){
    var ani = chalkAnimation.rainbow('Ticker: ' + program.ticker);
    ani.start(); // Animation resumes
-   graviex.ticker(program.ticker, function(res){
+   autradex.ticker(program.ticker, function(res){
        if(!res.error){
            console.log(res);
        }else{
@@ -66,9 +66,9 @@ if (program.ticker){
 }
 
 if(program.secretkey){
-    graviex.secretKey = program.secretkey;
+    autradex.secretKey = program.secretkey;
     if(program.accesskey){
-        graviex.accessKey = program.accesskey;
+        autradex.accessKey = program.accesskey;
         //START
         if (program.looptime){
         if (program.coin){
@@ -123,7 +123,7 @@ function DUMPIT(market, increase, volume){
                 console.log("[SYMBOL]: " + market);
                 //DUMPER ALL
                 chalkAnimation.pulse("[http://Merkle.Group | Graivex Dumper | info@merkle.group]");
-                var ani = chalkAnimation.rainbow('Graviex Dumping '+ volume + " " + market + '...');
+                var ani = chalkAnimation.rainbow('Autradex Dumping '+ volume + " " + market + '...');
                 mainDumpLoop(market, increase, balance.balance);
                 ani.start(); // Animation resumes
             }else{
@@ -146,7 +146,7 @@ coinBalance(alt_coin, function(balance){
 });
 */
 function coinBalance(altcoin, callback){
-	graviex.account(function(res){
+	autradex.account(function(res){
 		if(!res.error){
 			//console.log(res.accounts);
 			res.accounts.forEach(element => {
@@ -165,13 +165,13 @@ function coinBalance(altcoin, callback){
 //});
 
 function clearOrdersForMarket(market, callback){
-    graviex.orders(market, function(res){
+    autradex.orders(market, function(res){
         if(res.toString() == ""){
             return callback({success:true, data:"nothing to remove"});
         }else{
             if(!res.error){
                 console.log("[Remove Order "+market+"]: " + res[0].id)
-                graviex.cancelOrder(res[0].id, function(res){
+                autradex.cancelOrder(res[0].id, function(res){
                     if(!res.error){
                         return callback({success:true, data:res});
 
@@ -195,14 +195,14 @@ function mainDumpLoop(theMarket, increase, volume){
 
 
 
-			graviex.orderBook(theMarket, function(res){
+			autradex.orderBook(theMarket, function(res){
 				if(!res.error){		
 					var selling = parseFloat(res.asks[0].price);
                     console.log("[Selling]");
 					console.log("Selling At: " + selling.toFixed(9));
 					//check if those orders our ours, 
 					var oursSell = false;
-					graviex.orders(theMarket, function(res){
+					autradex.orders(theMarket, function(res){
 						if(!res.error){
 							//if not ours open orders + 1 and -1 each side of the market to try win spread
 							//console.log(res);
@@ -224,7 +224,7 @@ function mainDumpLoop(theMarket, increase, volume){
                                         console.log("Sell Price: " + sellPrice);
                                         //sell
                                         console.log("[ORDER LOG] " + theMarket + " SELL Volume: " + volume + " sellPrice: " + selling);
-                                        graviex.createOrder(theMarket, "sell", volume, sellPrice, function(res2){
+                                        autradex.createOrder(theMarket, "sell", volume, sellPrice, function(res2){
                                             if(!res.error){
                                                 console.log(res2.id + "|" + res2.state + "|" + res2.side);									
                                             }else{

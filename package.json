@@ -1,20 +1,19 @@
 {
-  "name": "graviex-dumper",
+  "name": "autradex-dumper",
   "version": "1.0.4",
-  "description": "A little bot for selling your graviex altcoin bags...",
+  "description": "A little bot for selling your autradex altcoin bags...",
   "main": "App.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Scott Lindh, <scottlindh@gmail.com>",
-  "git": "https://github.com/scottie/graviex-dumper",
+  "git": "https://github.com/farsider350/autradex-dumper",
   "license": "ISC",
   "bin": {
-    "graviex-dumper": "./App.js"
+    "autradex-dumper": "./App.js"
   },
   "dependencies": {
     "chalk-animation": "^1.6.0",
-    "commander": "^2.15.1",
-    "graviex": "^1.0.0"
+    "commander": "^2.15.1"
   }
 }

@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 //http://Merkle.Group
 //info@merkle.gorup
 //-Scott Lindh
@@ -30,7 +31,7 @@
 */
 // Insure you have enough in your account to cover Bot.
 
-var autradex = require("./autradex.js");
+var autradex = require("./../autradex-js/autradex.js");
 const chalkAnimation = require('chalk-animation');
 var program = require('commander');
 
@@ -85,7 +86,7 @@ if(program.secretkey){
                     }else{
                         vol = program.volume;
                         //DUMPER NOT ALL
-                        chalkAnimation.pulse("[http://Merkle.Group | Graivex Dumper | info@merkle.group]");
+                        chalkAnimation.pulse("[https://wallet.autradex.systems | Autradex Dumper | support@autradex.systems]");
                         DUMPIT(program.coin + program.market, program.increase, vol);
                     }
                     
@@ -122,7 +123,7 @@ function DUMPIT(market, increase, volume){
                 vol = parseInt(balance.balance)
                 console.log("[SYMBOL]: " + market);
                 //DUMPER ALL
-                chalkAnimation.pulse("[http://Merkle.Group | Graivex Dumper | info@merkle.group]");
+                chalkAnimation.pulse("Autradex Dumper");
                 var ani = chalkAnimation.rainbow('Autradex Dumping '+ volume + " " + market + '...');
                 mainDumpLoop(market, increase, balance.balance);
                 ani.start(); // Animation resumes
@@ -217,14 +218,14 @@ function mainDumpLoop(theMarket, increase, volume){
 			
 							if(!oursSell){
                                 console.log("Orders live are not ours, making new orders...");
-                                clearOrdersForMarket("onzbtc", function(res){
+                                clearOrdersForMarket(program.coin+program.market, function(res){
                                     if(!res.error){
                                         console.log("[Removing Old Orders]: Success == " + res.success);
                                         //Dumping
                                         console.log("Sell Price: " + sellPrice);
                                         //sell
                                         console.log("[ORDER LOG] " + theMarket + " SELL Volume: " + volume + " sellPrice: " + selling);
-                                        autradex.createOrder(theMarket, "sell", volume, sellPrice, function(res2){
+                                        autradex.createOrder(theMarket, "sell", program.volume, sellPrice, function(res2){
                                             if(!res.error){
                                                 console.log(res2.id + "|" + res2.state + "|" + res2.side);									
                                             }else{
